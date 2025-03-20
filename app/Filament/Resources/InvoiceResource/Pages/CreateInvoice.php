@@ -55,7 +55,7 @@ class CreateInvoice extends CreateRecord
             $record = parent::handleRecordCreation($data);
             $users = User::whereNotIn('id', [auth()->user()->id])->get();
             Notification::make()
-                ->title('Virtual Account berhasil dibuat')
+                ->title("Virtual Account berhasil dibuat ". auth()->user()->name)
                 ->body("Nomor VA: $vaNumber")
                 ->success()
                 ->send()
@@ -64,7 +64,9 @@ class CreateInvoice extends CreateRecord
                         InvoiceResource::getUrl('view', ['record' => $record->getKey()])
                     ),
                 ])
-                ->sendToDatabase($users);
+                ->seconds(10)
+                ->broadcast($users)
+                ->sendToDatabase($users, isEventDispatched: true);;
                     return $record;
         } catch (\Exception $e) {
             Notification::make()

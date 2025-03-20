@@ -8,6 +8,7 @@ use Filament\Widgets;
 use Filament\PanelProvider;
 use App\Filament\Auth\Login;
 use Filament\Enums\ThemeMode;
+use App\Filament\Pages\Dashboard;
 use Filament\Support\Colors\Color;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
@@ -86,6 +87,7 @@ class CmsPanelProvider extends PanelProvider
             ->darkMode()
             ->defaultThemeMode(ThemeMode::Dark)
             ->favicon(asset('favicon.ico'))
-            ->databaseNotifications();
+            ->databaseNotifications()
+            ->databaseNotificationsPolling(null);
     }
 }
