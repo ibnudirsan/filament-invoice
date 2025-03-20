@@ -85,6 +85,7 @@ class CmsPanelProvider extends PanelProvider
             ->brandLogo(fn() => view('brand'))
             ->darkMode()
             ->defaultThemeMode(ThemeMode::Dark)
-            ->favicon(asset('favicon.ico'));
+            ->favicon(asset('favicon.ico'))
+            ->databaseNotifications();
     }
 }

@@ -2,13 +2,14 @@
 
 namespace App\Filament\Resources\InvoiceResource\Pages;
 
-use App\Filament\Resources\InvoiceResource;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Actions;
-use Filament\Notifications\Notification;
 use Midtrans\Config;
+use Filament\Actions;
 use Midtrans\CoreApi;
 use Illuminate\Support\Str;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\InvoiceResource;
+use Filament\Notifications\Actions\Action;
 
 class CreateInvoice extends CreateRecord
 {
@@ -56,7 +57,13 @@ class CreateInvoice extends CreateRecord
                 ->title('Virtual Account berhasil dibuat')
                 ->body("Nomor VA: $vaNumber")
                 ->success()
-                ->send();
+                ->send()
+                ->actions([
+                    Action::make('View')->url(
+                        InvoiceResource::getUrl('view', ['record' => $record->getKey()])
+                    ),
+                ])
+                ->sendToDatabase(auth()->user());
                     return $record;
         } catch (\Exception $e) {
             Notification::make()

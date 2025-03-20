@@ -54,6 +54,8 @@ class InvoiceResource extends Resource
                         'bank_transfer' => 'Permata',
                         'echannel'      => 'Mandiri'
                     ])
+                    ->native(false)
+                    ->searchable()
                     ->required()
                     ->disabled(fn ($livewire) => $livewire instanceof EditRecord),
 
@@ -105,6 +107,7 @@ class InvoiceResource extends Resource
             'index' => Pages\ListInvoices::route('/'),
             'create' => Pages\CreateInvoice::route('/create'),
             'edit' => Pages\EditInvoice::route('/{record}/edit'),
+            'view' => Pages\ViewInvoice::route('/{record}'),
         ];
     }
 }
