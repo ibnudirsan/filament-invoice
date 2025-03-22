@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Filament\Notifications\Livewire\Notifications;
+use Filament\Support\Enums\Alignment;
+use Filament\Support\Enums\VerticalAlignment;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,9 +19,9 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     */
-    public function boot(): void
+     */public function boot()
     {
-        //
+        Notifications::alignment(Alignment::End);
+        Notifications::verticalAlignment(VerticalAlignment::End);
     }
 }
